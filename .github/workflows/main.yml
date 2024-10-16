@@ -1,0 +1,12 @@
+name: test
+on: 
+  schedule:
+    - cron: '34 1 * * 1'
+
+jobs: 
+  Save-A-File:
+    using: node@latest
+    
+    
+
+    
