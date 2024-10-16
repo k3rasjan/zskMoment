@@ -1,5 +1,5 @@
 import jsdom from 'jsdom';
-import fl from "fs";
+import fs from "fs";
 const { JSDOM } = jsdom;
 
 async function fetchTimetables() {
