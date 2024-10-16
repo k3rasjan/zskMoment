@@ -2,11 +2,40 @@ name: test
 on: 
   schedule:
     - cron: '34 1 * * 1'
+  workflow_dispatch:
 
-jobs: 
-  Save-A-File:
-    using: node@latest
-    
+jobs:
+  run_jsdom_script:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20' # Specify the Node.js version
+
+    - name: Install dependencies
+      run: |
+        npm install jsdom # Ensure jsdom is installed
+
+    - name: Run JavaScript file
+      run: |
+        node test.js # Replace with the path to your JavaScript file
+
+    - name: Check for changes
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git add .
+        git commit -m "Auto commit: update from jsdom script" || echo "No changes to commit"
+
+    - name: Push changes
+      run: git push
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     
 
     
