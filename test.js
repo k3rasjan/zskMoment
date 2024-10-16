@@ -191,4 +191,4 @@ function extractPlans(timetables) {
 const timetables = await fetchTimetables();
 const { classPlans, teacherPlans, roomPlans } = extractPlans(timetables);
 
-fs.writeFile("file.json", JSON.stringify(classPlans));
+fs.writeFile("file.json", JSON.stringify(classPlans), (err)=>console.log(err));
